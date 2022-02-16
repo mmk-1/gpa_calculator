@@ -15,12 +15,8 @@ class _BottomBarState extends State<BottomBar> {
   final creditController = TextEditingController();
   String dropdownVal = 'AA';
   String hintVal = 'Select Grade';
-
-  // double getGradeNum(String dropDownVal){
-  //   for (var i = 0; i < letterGrades.length; i++) {
-  //     if(letterGrades.keys.where((element) => false))
-  //   }
-  // }
+  String oldGradeVal = '';
+  String oldGradeHintVal = 'Old Grade';
 
   void _submitData() {
     if (creditController.text.isEmpty) {
@@ -39,9 +35,8 @@ class _BottomBarState extends State<BottomBar> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.blueGrey,
+      color: const Color.fromRGBO(93, 232, 199, 1),
       height: 40,
-      // width: double.infinity,
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -49,52 +44,75 @@ class _BottomBarState extends State<BottomBar> {
           // Credit INPUT
           Flexible(
             child: Container(
-              constraints: const BoxConstraints(maxWidth: 200),
-              color: Colors.orange,
+              constraints: const BoxConstraints(maxWidth: 100),
               child: TextField(
-                // onSubmitted: (value) {
-                //   // print(value);
-                //   print(creditController.text);
-                // },
                 controller: creditController,
                 decoration: const InputDecoration(
-                  label: Text('Credits'),
+                  hintText: 'Credits',
                 ),
               ),
             ),
           ),
           // GRADE SELECTION
           Flexible(
-            child: Container(
-              constraints: const BoxConstraints(minWidth: 100),
-              child: DropdownButton2(
-                  hint: Text(hintVal),
-                  items: <String>['AA', 'BA', 'BB', 'CB', 'CC', 'DC', 'DD']
-                      .map<DropdownMenuItem<String>>((String val) {
-                    return DropdownMenuItem<String>(
-                      value: val,
-                      child: Container(
-                        constraints: const BoxConstraints(minWidth: 100),
-                        child: Text(
-                          val,
-                          textAlign: TextAlign.center,
-                        ),
-                        alignment: Alignment.center,
+            child: DropdownButton2(
+                isExpanded: true,
+                hint: Text(
+                  hintVal,
+                ),
+                items: <String>['AA', 'BA', 'BB', 'CB', 'CC', 'DC', 'DD']
+                    .map<DropdownMenuItem<String>>((String val) {
+                  return DropdownMenuItem<String>(
+                    value: val,
+                    child: Container(
+                      constraints:
+                          const BoxConstraints(maxWidth: 100, minWidth: 50),
+                      child: Text(
+                        val,
+                        textAlign: TextAlign.center,
                       ),
-                    );
-                  }).toList(),
-                  onChanged: (val) {
-                    dropdownVal = val.toString();
-                    setState(() {
-                      hintVal = val.toString();
-                    });
-                  }),
-            ),
+                      alignment: Alignment.center,
+                    ),
+                  );
+                }).toList(),
+                onChanged: (val) {
+                  dropdownVal = val.toString();
+                  setState(() {
+                    hintVal = val.toString();
+                  });
+                }),
           ),
+          // OLD GRADE SELECTION
+          Flexible(
+            child: DropdownButton2(
+                isExpanded: true,
+                hint: Text(oldGradeHintVal),
+                items: <String>['', 'AA', 'BA', 'BB', 'CB', 'CC', 'DC', 'DD']
+                    .map<DropdownMenuItem<String>>((String val) {
+                  return DropdownMenuItem<String>(
+                    value: val,
+                    child: Container(
+                      constraints:
+                          const BoxConstraints(maxWidth: 100, minWidth: 50),
+                      child: Text(
+                        val,
+                        textAlign: TextAlign.center,
+                      ),
+                      alignment: Alignment.center,
+                    ),
+                  );
+                }).toList(),
+                onChanged: (val) {
+                  oldGradeVal = val.toString();
+                  setState(() {
+                    oldGradeHintVal = val.toString();
+                  });
+                }),
+          ),
+          // ADD BUTTON
           Flexible(
             child: Container(
               constraints: const BoxConstraints(maxWidth: 200),
-              color: Colors.orange,
               child: ElevatedButton.icon(
                 onPressed: _submitData,
                 icon: const Icon(Icons.add),

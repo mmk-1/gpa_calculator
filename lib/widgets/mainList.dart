@@ -12,18 +12,28 @@ class MainList extends StatelessWidget {
         itemCount: grades.length,
         itemBuilder: (BuildContext ctx, itemcount) {
           return Container(
-            padding: EdgeInsets.symmetric(horizontal: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 10),
             margin: const EdgeInsets.symmetric(vertical: 5),
-            color: Colors.red,
-            height: 30,
+            color: Colors.grey,
+            height: 40,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Text(grades[itemcount].credit.toString()),
-                Text('Credit'),
-                Text(grades[itemcount].grade.toString()),
-                Text('Grade'),
-                Icon(Icons.edit)
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    const Text('Credit'),
+                    Text(grades[itemcount].credit.toString()),
+                  ],
+                ),
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    const Text('Grade'),
+                    Text(grades[itemcount].grade.toString()),
+                  ],
+                ),
+                const Icon(Icons.edit)
               ],
             ),
           );
