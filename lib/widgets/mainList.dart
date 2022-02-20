@@ -40,7 +40,16 @@ class MainList extends StatelessWidget {
                     // Text(grades[itemcount].letterGrade.toString()),
                   ],
                 ),
-                const Icon(Icons.edit)
+                TextButton(
+                  onPressed: () {
+                    gradesData.removeGrade(
+                        gradesData.getGradesList[itemcount].credit,
+                        gradesData.getGradesList[itemcount].letterGrade,
+                        gradesData.getGradesList[itemcount].oldGrade);
+                  },
+                  child: const Icon(Icons.delete),
+                  style: TextButton.styleFrom(primary: Colors.red[400]),
+                ),
               ],
             ),
           );

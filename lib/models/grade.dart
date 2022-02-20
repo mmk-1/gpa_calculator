@@ -1,7 +1,8 @@
 class Grade {
   final String letterGrade;
   final double credit;
-  Grade(this.credit, this.letterGrade);
+  final String oldGrade;
+  Grade(this.credit, this.letterGrade, this.oldGrade);
 }
 
 Map<String, double> letterGrades = {

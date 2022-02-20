@@ -33,18 +33,22 @@ class _HomeState extends State<Home> {
               // "Previous" CGPA and Credits
               ListView(
                 shrinkWrap: true,
-                children: const <Widget>[
+                children: <Widget>[
                   TextField(
-                    decoration: InputDecoration(
-                        hintText: 'Previous CGPA',
-                        contentPadding: EdgeInsets.symmetric(horizontal: 10)),
+                    decoration: const InputDecoration(
+                      hintText: 'Previous CGPA',
+                      contentPadding: EdgeInsets.symmetric(horizontal: 10),
+                    ),
                     keyboardType: TextInputType.number,
+                    controller: gradesData.prevCGPAController,
                   ),
                   TextField(
-                    decoration: InputDecoration(
-                        hintText: 'Previous Credit',
-                        contentPadding: EdgeInsets.symmetric(horizontal: 10)),
+                    decoration: const InputDecoration(
+                      hintText: 'Previous Credit',
+                      contentPadding: EdgeInsets.symmetric(horizontal: 10),
+                    ),
                     keyboardType: TextInputType.number,
+                    controller: gradesData.prevCreditController,
                   )
                 ],
               ),
