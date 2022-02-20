@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:mytasks/providers/grades.dart';
+import 'package:provider/provider.dart';
 
 import 'widgets/output.dart';
 import 'widgets/bottomBar.dart';
 import 'widgets/mainList.dart';
 import 'models/grade.dart';
+import './providers/grades.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -11,34 +14,9 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  final List<Grade> _grades = [];
-  String outputTxt = 'Press Calculate';
-
-  void addNewGrade(double credit, double grade) {
-    final newGrade = Grade(credit, grade);
-    setState(() {
-      _grades.add(newGrade);
-    });
-  }
-
-  void computeGPA() {
-    double res = 0;
-    double totalCred = 0;
-    for (var i = 0; i < _grades.length; i++) {
-      res += _grades[i].credit * _grades[i].grade;
-      totalCred += _grades[i].credit;
-    }
-    // print(res);
-    // print(totalCred);
-    res /= totalCred;
-    setState(() {
-      outputTxt = res.toStringAsFixed(2);
-    });
-    // return res;
-  }
-
   @override
   Widget build(BuildContext context) {
+    final gradesData = Provider.of<Grades>(context);
     // 2 Scaffolds to make the bottom bar stick on top of keyboard
     return Scaffold(
       body: Scaffold(
@@ -51,7 +29,7 @@ class _HomeState extends State<Home> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               // Output
-              Output(computeGPA, outputTxt),
+              Output(),
               // "Previous" CGPA and Credits
               ListView(
                 shrinkWrap: true,
@@ -75,7 +53,7 @@ class _HomeState extends State<Home> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    MainList(_grades),
+                    MainList(),
                   ],
                 ),
               ),
@@ -83,7 +61,7 @@ class _HomeState extends State<Home> {
           ),
         ),
         // resizeToAvoidBottomInset: ,
-        bottomNavigationBar: BottomBar(addNewGrade), // bottomSheet: ,
+        bottomNavigationBar: BottomBar(), // bottomSheet: ,
       ),
     );
   }

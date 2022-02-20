@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:provider/provider.dart';
+
+import '../providers/grades.dart';
 import 'mainList.dart';
 import '../models/grade.dart';
 
 class BottomBar extends StatefulWidget {
-  final Function addGrade;
-  BottomBar(this.addGrade);
+  // final Function addGrade;
+  // BottomBar(this.addGrade);
 
   @override
   _BottomBarState createState() => _BottomBarState();
@@ -22,8 +25,9 @@ class _BottomBarState extends State<BottomBar> {
     if (creditController.text.isEmpty) {
       return;
     }
-    widget.addGrade(
-        double.parse(creditController.text), letterGrades[dropdownVal]);
+    // widget.addGrade(double.parse(creditController.text), dropdownVal);
+    Provider.of<Grades>(context, listen: false)
+        .addNewGrade(double.parse(creditController.text), dropdownVal);
   }
 
   @override
@@ -114,7 +118,12 @@ class _BottomBarState extends State<BottomBar> {
             child: Container(
               constraints: const BoxConstraints(maxWidth: 200),
               child: ElevatedButton.icon(
-                onPressed: _submitData,
+                onPressed: () {
+                  _submitData();
+                  creditController.clear();
+                  hintVal = 'Select Grade';
+                  oldGradeHintVal = 'Old Grade';
+                },
                 icon: const Icon(Icons.add),
                 label: const Text('Add'),
               ),

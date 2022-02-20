@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mytasks/providers/grades.dart';
+import 'package:provider/provider.dart';
 
 import './home.dart';
 
@@ -26,7 +28,10 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: Home(),
+      home: ChangeNotifierProvider(
+        create: (ctx) => Grades(),
+        child: Home(),
+      ),
     );
   }
 }

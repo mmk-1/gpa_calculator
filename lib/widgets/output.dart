@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-import '../models/grade.dart';
+import '../providers/grades.dart';
 
 class Output extends StatelessWidget {
-  final Function computeGPA;
-  String outputTxt;
-  Output(this.computeGPA, this.outputTxt);
+  // final Function computeGPA;
+  // String outputTxt;
+  // Output(this.computeGPA, this.outputTxt);
 
   @override
   Widget build(BuildContext context) {
+    final gradesData = Provider.of<Grades>(context);
     return Row(
       children: [
         Expanded(
@@ -16,7 +18,7 @@ class Output extends StatelessWidget {
           child: Container(
             color: Colors.amber,
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-            child: Text(outputTxt),
+            child: Text(gradesData.outputTxt),
           ),
         ),
         Expanded(
@@ -29,7 +31,7 @@ class Output extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
             ),
-            onTap: () => computeGPA(),
+            onTap: () => gradesData.computeGPA(),
           ),
         )
       ],
