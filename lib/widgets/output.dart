@@ -4,11 +4,6 @@ import 'package:provider/provider.dart';
 import '../providers/grades.dart';
 
 class Output extends StatelessWidget {
-  // final Function computeGPA;
-  // String outputTxt;
-  // Output(this.computeGPA, this.outputTxt);
-
-  @override
   Widget build(BuildContext context) {
     final gradesData = Provider.of<Grades>(context);
     return Row(
@@ -18,7 +13,13 @@ class Output extends StatelessWidget {
           child: Container(
             color: Colors.amber,
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-            child: Text(gradesData.outputTxt),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Text('CGPA: ' + gradesData.outputCGPA),
+                Text(' GPA: ' + gradesData.outputGPA),
+              ],
+            ),
           ),
         ),
         Expanded(

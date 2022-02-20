@@ -26,8 +26,8 @@ class _BottomBarState extends State<BottomBar> {
       return;
     }
     // widget.addGrade(double.parse(creditController.text), dropdownVal);
-    Provider.of<Grades>(context, listen: false)
-        .addNewGrade(double.parse(creditController.text), dropdownVal);
+    Provider.of<Grades>(context, listen: false).addNewGrade(
+        double.parse(creditController.text), dropdownVal, oldGradeVal);
   }
 
   @override
